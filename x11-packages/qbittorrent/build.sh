@@ -3,6 +3,7 @@ TERMUX_PKG_DESCRIPTION="A Qt6 based BitTorrent client"
 TERMUX_PKG_LICENSE="GPL-2.0, GPL-3.0"
 TERMUX_PKG_MAINTAINER="Joshua Kahn @TomJo2000"
 TERMUX_PKG_VERSION="5.0.3"
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_SRCURL=https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=12dc7228b6fd1f0c184e0fd58836797b9f01fd7da89c9ff65795a031eb571759
 TERMUX_PKG_BUILD_DEPENDS="qt6-qtsvg, qt6-qttools, boost"
