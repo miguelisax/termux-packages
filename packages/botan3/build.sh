@@ -23,6 +23,20 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --program-suffix=$(echo ${TERMUX_PKG_VERSION#*:} | cut -d . -f 1)
 "
 
+# Fix for boost 1.87
+# NOTE: Remove after version 3.7.0 release in February.
+# See https://github.com/randombit/botan/issues/4505
+termux_step_post_get_source() {
+	local patch_file="$TERMUX_PKG_TMPDIR/boost1_87-fix.patch"
+	termux_download https://github.com/randombit/botan/commit/2a406beab449a2cb310fa543451a7087ca7b4b1a.patch \
+		"$patch_file" \
+		6eae04e44bfab9a24ff997a3569229fcf14173733b32f764ca5962a0d773eac9
+	(
+		cd "$TERMUX_PKG_SRCDIR" || exit
+		patch -p1 <"$patch_file"
+	)
+}
+
 termux_step_pre_configure() {
 	CXXFLAGS+=" $CPPFLAGS"
 }
