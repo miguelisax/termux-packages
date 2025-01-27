@@ -4,6 +4,7 @@ TERMUX_PKG_LICENSE="Apache-2.0"
 TERMUX_PKG_MAINTAINER="@termux"
 # Align the version with `python-pyarrow` package.
 TERMUX_PKG_VERSION="18.1.0"
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_SRCURL=https://github.com/apache/arrow/archive/refs/tags/apache-arrow-${TERMUX_PKG_VERSION}.tar.gz
 TERMUX_PKG_SHA256=026ecabd74f7b075f6c74e5448132ba40f35688a29d07616bcc1bd976676706c
 TERMUX_PKG_AUTO_UPDATE=true
