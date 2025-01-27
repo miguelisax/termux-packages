@@ -7,7 +7,7 @@ TERMUX_PKG_REVISION=1
 TERMUX_PKG_SRCURL=http://deb.debian.org/debian/pool/main/a/aptitude/aptitude_$TERMUX_PKG_VERSION.orig.tar.xz
 TERMUX_PKG_SHA256=0ef50cb5de27215dd30de74dd9b46b318f017bd0ec3f5c4735df7ac0beb40248
 TERMUX_PKG_DEPENDS="apt, boost, libcwidget, libsigc++-2.0, libsqlite, libxapian, ncurses"
-TERMUX_PKG_BUILD_DEPENDS="boost-headers, googletest"
+TERMUX_PKG_BUILD_DEPENDS="boost-headers, googletest, binutils-cross"
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 --disable-tests
 --disable-docs
@@ -20,6 +20,16 @@ TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
 
 termux_step_pre_configure() {
 	CXXFLAGS+=" -DNCURSES_WIDECHAR=1"
+
+	# This occurs after boost update to 1.87
+	if [ "$TERMUX_ARCH" = arm ]; then
+		#```
+		# <inline asm>:1:41: error: expected '%<type>' or "<type>"
+		# .pushsection ".debug_gdb_scripts", "MS",@progbits,1
+		# ```
+		# See also https://github.com/llvm/llvm-project/issues/24438.
+		termux_setup_no_integrated_as
+	fi
 }
 
 termux_step_create_debscripts() {
